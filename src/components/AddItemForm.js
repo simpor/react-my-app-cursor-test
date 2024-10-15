@@ -17,7 +17,7 @@ function AddItemForm({ addItem, onCancel }) {
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Enter item text"
+        placeholder="Enter item text!!!"
         autoFocus
       />
       <button type="submit">Add</button>
