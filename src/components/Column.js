@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AddItemForm from './AddItemForm';
 
-function Column({ column, onDragStart, onDragOver, onDrop, setColumns, moveColumn }) {
+function Column({ column, onDragStart, onDragOver, onDrop, onTouchStart, onTouchMove, onTouchEnd, setColumns, moveColumn }) {
   const [showAddForm, setShowAddForm] = useState(false);
 
   const addItem = (text) => {
@@ -24,6 +24,7 @@ function Column({ column, onDragStart, onDragOver, onDrop, setColumns, moveColum
       className="column"
       onDragOver={onDragOver}
       onDrop={() => onDrop(column.id)}
+      data-column-id={column.id}
     >
       <div className="column-header">
         <button className="column-move-button" onClick={() => moveColumn(column.id, 'left')}>←</button>
@@ -37,6 +38,9 @@ function Column({ column, onDragStart, onDragOver, onDrop, setColumns, moveColum
             className="item fade-in"
             draggable
             onDragStart={() => onDragStart(item, column.id)}
+            onTouchStart={(e) => onTouchStart(e, item, column.id)}
+            onTouchMove={onTouchMove}
+            onTouchEnd={(e) => onTouchEnd(e, column.id)}
           >
             {item.text}
           </div>
